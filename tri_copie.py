@@ -108,4 +108,5 @@ if __name__=="__main__":
             lline = re.split(r' +',line.rstrip("\n"))
             l = build(lline)
             print(f"{l=}")
-            print(f"{tri(l)=}")
+            tri(l)
+            print(f"{l=}")
