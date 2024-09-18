@@ -82,26 +82,30 @@ def mklist():
             i+=1
 
 if __name__=="__main__":
-    # programme principal (liste rentrée par l'utilisateur)
-    while True:
-        line = input("? ").rstrip("\n").strip()
-        if line=="":
-            break
-        lline = re.split(r' +',line.rstrip("\n"))
-        i = 0
-        l1 = mklist()                      # rÃ©cupÃ©ration de la liste
-        tri(l1)
-        print(f"{l1=}")
 
-    # programme principal (liste rentrée en argument)
-    l2 = construire()                   # rÃ©cupÃ©ration de la liste
-    tri(l2)
-    print(f"{l1=}")
+    if len(sys.argv)>2:
+        # programme principal (liste rentrée en argument)
+        l = construire()                   # rÃ©cupÃ©ration de la liste
+        tri(l)
+        print(f"{l=}")
 
-    # programme principal (liste tirée d'un fichier)
-    f = open(sys.argv[1], "r")
-    for line in f:
-        lline = re.split(r' +',line.rstrip("\n"))
-        l3 = build(lline)
-        print(f"{l3=}")
-        print(f"{tri(l3)=}")
+    elif len(sys.argv)==1:
+        # programme principal (liste rentrée par l'utilisateur)
+        while True:
+            line = input("? ").rstrip("\n").strip()
+            if line=="":
+                break
+            lline = re.split(r' +',line.rstrip("\n"))
+            i = 0
+            l = mklist()                      # rÃ©cupÃ©ration de la liste
+            tri(l)
+            print(f"{l=}")
+
+    else :
+        # programme principal (liste tirée d'un fichier)
+        f = open(sys.argv[1], "r")
+        for line in f:
+            lline = re.split(r' +',line.rstrip("\n"))
+            l = build(lline)
+            print(f"{l=}")
+            print(f"{tri(l)=}")
