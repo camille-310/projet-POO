@@ -21,6 +21,7 @@ def profondeur(l):
 
 if __name__=="__main__":
     # programme principal
-    l = Module.module()
-    print(f"{l=}")
-    print(f"{profondeur(l)=}")
+    L = Module.module()
+    for l in L:
+        print(f"{l=}")
+        print(f"{profondeur(l)=}")
