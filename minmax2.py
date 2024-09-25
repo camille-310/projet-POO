@@ -14,7 +14,8 @@ def minmax(l):
 
 if __name__=="__main__":
     # programme principal
-    l = Module.module()
-    maxi = []
-    minmax(l)
-    print(min(maxi))
+    L = Module.module()
+    for l in L:
+        maxi = []
+        minmax(l)
+        print(min(maxi))
