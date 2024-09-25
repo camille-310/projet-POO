@@ -49,14 +49,15 @@ def build(l0):
     res = _build()
     return res
 
-def mklist():
+def mklist(lline):
+
     global i
     l = []          # liste courante
     while True:
         if lline[i]=="[":   # c'est une liste de listes
             i+=1                 # argument suivant
             if i!=1:             # pour la premiÃ¨re liste, on ne fait rien
-                l.append(mklist())    # sinon on construit cette sous-liste et on la met dans la liste courante
+                l.append(mklist(lline))    # sinon on construit cette sous-liste et on la met dans la liste courante
         elif lline[i]=="]": # c'est la fin de la liste,
             i+=1
             return l             # on renvoie la liste courante
@@ -64,12 +65,16 @@ def mklist():
             l.append(int(lline[i]))
             i+=1
 
-
 def module():
+
+    global i
+    L = []
+
     if len(sys.argv)>2:
         # programme principal (liste rentrée en argument)
-        l = construire()                   # rÃ©cupÃ©ration de la liste
-        return l
+        l = construire()
+        L.append(l)# rÃ©cupÃ©ration de la liste
+        return L
 
     elif len(sys.argv)==1:
         # programme principal (liste rentrée par l'utilisateur)
@@ -79,8 +84,9 @@ def module():
                 break
             lline = re.split(r' +',line.rstrip("\n"))
             i = 0
-            l = mklist()                      # rÃ©cupÃ©ration de la liste
-            return l
+            l = mklist(lline)                      # rÃ©cupÃ©ration de la liste
+            L.append(l)
+            return L
 
     else :
         # programme principal (liste tirée d'un fichier)
@@ -88,4 +94,5 @@ def module():
         for line in f:
             lline = re.split(r' +',line.rstrip("\n"))
             l = build(lline)
-            return l
+            L.append(l)
+        return L
