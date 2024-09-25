@@ -14,6 +14,8 @@ def tri(l):
 
 if __name__=="__main__":
     # programme principal
-    l = Module.module()
-    tri(l)
-    print(f"{l=}")
+    L = Module.module()
+    for l in L:
+        tri(l)
+        print(f"{l=}")
+
