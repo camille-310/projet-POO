@@ -2,8 +2,8 @@
 import sys, re
 
 
-def construire():
-    def _construire():
+def argument():
+    def _argument():
         """
         Cette fonction rÃ©cursive construit la liste
         Ã  partir des arguments fournis sur la ligne de commande.
@@ -19,7 +19,7 @@ def construire():
             if sys.argv[i]=="[":
                 i+=1
                 if i!=2:                  # pour la premiÃ¨re liste, on ne fait rien
-                    l.append(_construire())
+                    l.append(_argument())
             elif sys.argv[i]=="]":        # c'est la fin de la liste,
                 i+=1
                 return l                  # on renvoie la liste constuite
@@ -27,14 +27,14 @@ def construire():
                 l.append(int(sys.argv[i]))
                 i+=1
     i = 1                              # indice pour parcourir les arguments
-    return _construire()
+    return _argument()
 
-def build(l0):
+def fichier(l0):
     """
     Cette fonction construit la liste correspondant Ã  sa reprÃ©sentation chaine de caractÃ¨re fourni en argument.
     """
 
-    def _build():
+    def _fichier():
         nonlocal i
         l = []          # sous-liste courante
         assert l0[0]=="[", "la liste n'est pas ouverte"
@@ -44,7 +44,7 @@ def build(l0):
             if l0[i]=="[":   # c'est une sous-liste de listes
                 i+=1
                 if i!=1:             # pour la premiÃ¨re sous-liste, on ne fait rien
-                    l.append(_build())    # sinon on construit cette sous-liste et on la met dans la sous-liste courante
+                    l.append(_fichier())    # sinon on construit cette sous-liste et on la met dans la sous-liste courante
             elif l0[i]=="]": # c'est la fin de la sous-liste courante,
                 i+=1
                 return l             # on renvoie la sous-liste courante
@@ -52,10 +52,10 @@ def build(l0):
                 l.append(int(l0[i]))
                 i+=1
     i = 0
-    res = _build()
+    res = _fichier()
     return res
 
-def mklist(lline):
+def utilisateur(lline):
 
     global i
     l = []          # liste courante
@@ -66,7 +66,7 @@ def mklist(lline):
         if lline[i]=="[":   # c'est une liste de listes
             i+=1                 # argument suivant
             if i!=1:             # pour la premiÃ¨re liste, on ne fait rien
-                l.append(mklist(lline))    # sinon on construit cette sous-liste et on la met dans la liste courante
+                l.append(utilisateur(lline))    # sinon on construit cette sous-liste et on la met dans la liste courante
         elif lline[i]=="]": # c'est la fin de la liste,
             i+=1
             return l             # on renvoie la liste courante
@@ -81,7 +81,7 @@ def module():
 
     if len(sys.argv)>2:
         # programme principal (liste rentrée en argument)
-        l = construire()
+        l = argument()
         L.append(l)# rÃ©cupÃ©ration de la liste
         return L
 
@@ -93,7 +93,7 @@ def module():
                 break
             lline = re.split(r' +',line.rstrip("\n"))
             i = 0
-            l = mklist(lline)                      # rÃ©cupÃ©ration de la liste
+            l = utilisateur(lline)                      # rÃ©cupÃ©ration de la liste
             L.append(l)
             return L
 
@@ -102,6 +102,6 @@ def module():
         f = open(sys.argv[1], "r")
         for line in f:
             lline = re.split(r' +',line.rstrip("\n"))
-            l = build(lline)
+            l = fichier(lline)
             L.append(l)
         return L
