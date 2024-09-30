@@ -12,9 +12,6 @@ def construire():
 
         nonlocal i
         l = []
-        assert sys.argv[1]=="[", "la liste n'est pas ouverte"
-        assert sys.argv[-1]=="]", "la liste n'est pas fermée"
-        assert sys.argv[i]=="[" and sys.argv[i+1]!="]", "une des sous-listes est vide"
         while True:
             if sys.argv[i]=="[":
                 i+=1
@@ -37,9 +34,6 @@ def build(l0):
     def _build():
         nonlocal i
         l = []          # sous-liste courante
-        assert l0[0]=="[", "la liste n'est pas ouverte"
-        assert l0[-1]=="]", "la liste n'est pas fermée"
-        assert l0[i]=="[" and l0[i+1]!="]", "une des sous-listes est vide"
         while True:
             if l0[i]=="[":   # c'est une sous-liste de listes
                 i+=1
@@ -59,9 +53,6 @@ def mklist(lline):
 
     global i
     l = []          # liste courante
-    assert lline[0]=="[", "la liste n'est pas ouverte"
-    assert lline[-1]=="]", "la liste n'est pas fermée"
-    assert lline[i]=="[" and lline[i+1]!="]", "une des sous-listes est vide"
     while True:
         if lline[i]=="[":   # c'est une liste de listes
             i+=1                 # argument suivant
