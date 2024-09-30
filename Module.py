@@ -3,6 +3,7 @@ import sys, re
 
 
 def construire():
+    
     def _construire():
         """
         Cette fonction rÃ©cursive construit la liste
@@ -15,15 +16,15 @@ def construire():
         while True:
             if sys.argv[i]=="[":
                 i+=1
-                if i!=2:                  # pour la premiÃ¨re liste, on ne fait rien
+                if i!=2:                             # pour la premiÃ¨re liste, on ne fait rien
                     l.append(_construire())
-            elif sys.argv[i]=="]":        # c'est la fin de la liste,
+            elif sys.argv[i]=="]":                   # c'est la fin de la liste,
                 i+=1
-                return l                  # on renvoie la liste constuite
-            else:                         # c'est une liste d'entiers
+                return l                             # on renvoie la liste constuite
+            else:                                    # c'est une liste d'entiers
                 l.append(int(sys.argv[i]))
                 i+=1
-    i = 1                              # indice pour parcourir les arguments
+    i = 1                                            # indice pour parcourir les arguments
     return _construire()
 
 def build(l0):
@@ -33,16 +34,16 @@ def build(l0):
 
     def _build():
         nonlocal i
-        l = []          # sous-liste courante
+        l = []                                       # sous-liste courante
         while True:
-            if l0[i]=="[":   # c'est une sous-liste de listes
+            if l0[i]=="[":                           # c'est une sous-liste de listes
                 i+=1
-                if i!=1:             # pour la premiÃ¨re sous-liste, on ne fait rien
-                    l.append(_build())    # sinon on construit cette sous-liste et on la met dans la sous-liste courante
-            elif l0[i]=="]": # c'est la fin de la sous-liste courante,
+                if i!=1:                             # pour la premiÃ¨re sous-liste, on ne fait rien
+                    l.append(_build())               # sinon on construit cette sous-liste et on la met dans la sous-liste courante
+            elif l0[i]=="]":                         # c'est la fin de la sous-liste courante,
                 i+=1
-                return l             # on renvoie la sous-liste courante
-            else:                  # c'est une sous-liste d'entiers
+                return l                             # on renvoie la sous-liste courante
+            else:                                    # c'est une sous-liste d'entiers
                 l.append(int(l0[i]))
                 i+=1
     i = 0
@@ -52,16 +53,16 @@ def build(l0):
 def mklist(lline):
 
     global i
-    l = []          # liste courante
+    l = []                                          # liste courante
     while True:
-        if lline[i]=="[":   # c'est une liste de listes
-            i+=1                 # argument suivant
-            if i!=1:             # pour la premiÃ¨re liste, on ne fait rien
-                l.append(mklist(lline))    # sinon on construit cette sous-liste et on la met dans la liste courante
-        elif lline[i]=="]": # c'est la fin de la liste,
+        if lline[i]=="[":                           # c'est une liste de listes
+            i+=1                                    # argument suivant
+            if i!=1:                                # pour la premiÃ¨re liste, on ne fait rien
+                l.append(mklist(lline))             # sinon on construit cette sous-liste et on la met dans la liste courante
+        elif lline[i]=="]":                         # c'est la fin de la liste,
             i+=1
-            return l             # on renvoie la liste courante
-        else:                  # c'est une liste d'entiers
+            return l                                # on renvoie la liste courante
+        else:                                       # c'est une liste d'entiers
             l.append(int(lline[i]))
             i+=1
 
@@ -73,7 +74,7 @@ def module():
     if len(sys.argv)>2:
         # programme principal (liste rentrée en argument)
         l = construire()
-        L.append(l)# rÃ©cupÃ©ration de la liste
+        L.append(l)                                # rÃ©cupÃ©ration de la liste
         return L
 
     elif len(sys.argv)==1:
